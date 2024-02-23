@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+        <title>Dashboard</title>
+    
+        <!-- Additional inline CSS for custom styling (optional) -->
+        <style>
+            .nav-custom {
+                background-color: #575d64;
+                border-bottom: 1px solid #333030;
+                padding: 10px 0;
+            }
+            .nav-custom ul {
+                list-style-type: none;
+                padding-left: 0;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-custom li {
+                margin: 0 15px;
+            }
+            .nav-custom a {
+                text-decoration: none;
+                color: #ff00c8;
+                font-weight: 500;
+            }
+            .nav-custom a:hover {
+                color: #b30095;
+            }
+        </style>
+    </head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-custom">
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <ln><a href="/generate/playercount">Player Count</a></ln>
+            <ln><a href="/generate/tier">Tier Info</a></ln>
+            <li><a href="/generate/getapi">API Key</a></li>
+            <li><a href="/generate/interactions">Interactions</a></li>
+            <ln><a href="/auth/logout">Log Out</a></ln>
+            <!-- Add more links as needed -->
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <p class="lead mb-3">Welcome <%= name %></p>
+        <button class="form-control" id="update">UpdateDB</button>
+        <a href="/generate/updateDB" class="btn btn-secondary">UpdateDB</a>
+        <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+    </div>
+
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+
+    <script>
+        document.getElementById('update').addEventListener('click', function() {
+            fetch('/generate/updateDB', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

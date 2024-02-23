@@ -1,0 +1,58 @@
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body text-center">
+            <h1 class="mb-3">
+                <img src="/assets/secure-icon.png" alt="icon" width="20%" />
+            </h1>
+            <h2>
+                Player Count
+            </h2>
+            <%- include ("./messages") %>
+            <input class="form-control" id="TotalInteractions" type="text" value="" placeholder="Total interactions is..."  />
+            <input class="form-control" id="DailyInteractions" type="text" value="" placeholder="Total interactions is..."  />
+            <button class="form-control" id="inter">Add 1 to interactions</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function fetchTier() {
+        fetch('/generate/interactions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body:{
+                
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('TotalInteractions').value = data.totalInteractions;
+            document.getElementById('DailyInteractions').value = data.dailyInteractions;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+    document.getElementById('inter').addEventListener('click', function() {
+        fetch('/generate/updateInteractions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('TotalInteractions').value = data.totalInteractions;
+            document.getElementById('DailyInteractions').value = data.dailyInteractions;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', fetchTier);
+</script>

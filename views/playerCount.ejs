@@ -1,0 +1,35 @@
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body text-center">
+            <h1 class="mb-3">
+                <img src="/assets/secure-icon.png" alt="icon" width="20%" />
+            </h1>
+            <h2>
+                Player Count
+            </h2>
+            <input class="form-control" id="players" type="text" value="" placeholder="Current count of players is..."  />
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function fetchPlayerCount() {
+        fetch('/generate/playercount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('players').value = data.playerCount;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchPlayerCount);
+</script>
